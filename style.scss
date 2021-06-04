@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@300;400;700&display=swap');
+
+$gray: #303633;  /* rgb(48,54,51) */
+$lightGray: #f2f2f2;
+$green: #8bebcd; /* rgb(139, 232, 203)  */
+$pink: #9c7a97;  /* rgb(156, 122, 151) */
+$white: #fff;
+$headings: 'Source Sans Pro', sans-serif;
+$text: 'Lato', sans-serif;
+$transition: .3s ease;
+$font: 16px;
+/**************
+mixins
+***************/
+@mixin flex ($justify, $align, $direction) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+}
+@mixin btn($color, $background,$border) {
+    padding: 10px 40px;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: $border;
+    cursor: pointer;
+    transition: $transition;
+    color: $color;
+    background: $background;
+    &:hover {
+        border: 2px solid $pink;
+        color: $pink;
+
+    }
+}
+@mixin line {
+    display: block;
+    content: "";
+    width: 100% ;
+    height: 2px;
+    background: $lightGray;
+    margin: 35px 0;
+}
+
+/**************
+basic styles
+**************/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: $text;
+    font-size: $font;
+    color: $gray;
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1.6;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: $headings;
+}
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    &::after {
+        display: block;
+        content: "";
+        width: 100px;
+        height: 2px;
+        background: $pink;
+        margin: 20px 0;
+    }
+}
+ul {
+    list-style: none;
+}
+/**************
+aside
+**************/
+aside {
+    flex: 0 0 34%;
+    background-image: linear-gradient(rgba($gray,.9),rgba($pink,.9)),url(img/bg.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    text-align: right;
+    padding-right: 60px;
+    @include flex(center, flex-end, column);
+    @media(max-width:767px) {
+        flex: 0 0 100%;
+        text-align: center;
+        align-items: center;
+        height: 35vh;
+    }
+    img {
+        width: 40%;
+        border-radius: 50%;
+        border: 5px solid $pink;
+        @media(max-width:767px) {
+            margin-left: 10px;
+        }
+    }
+    h1 {
+        font-size: 1.5rem;
+        color: $white;
+        font-weight: 300;
+        padding: 30px 0;
+        span {
+            font-weight: 700;
+            font-style: italic;
+            color: $green;
+            letter-spacing: 2px;
+        }
+        @media(max-width:767px) {
+            padding-left: 10px;
+        }
+    }
+    div {
+        a {
+            margin-left: 20px;
+            color: $green;
+            font-size: 2rem;
+            transition: $transition;
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+}
+.main {
+    flex: 0 0 66%;
+    height: 100vh;
+    overflow: scroll;
+    padding: 40px;
+    @media(max-width:767px) {
+        flex: 0 0 100%;
+        
+    }
+    .about {
+        button {
+            @include btn($green, transparent, 2px solid $green);
+        }
+        p {
+            margin-bottom: 30px;
+        }
+        &::after {
+            @include line;
+        }
+    }
+    .portfolio {
+        .row {
+            @include flex(space-between, center, row);
+            div {
+                margin-top: 30px;
+                flex: 0 0 48%;
+                @media(max-width:767px) {
+                    flex: 0 0 100%;
+                }
+                img {
+                    width: 100%;
+                    transition: $transition;
+                    &:hover {
+                        opacity: .5;
+                        transform: scale(1.1);
+                    }
+                }
+                h3 {
+                    font-size: 1.5rem;
+                    padding: 15px 0;
+                    color: $pink;
+                }
+            }
+        }
+        button {
+            @include btn($green, transparent, 2px solid $green);
+            margin-top: 40px;
+        }
+        &::after {
+            @include line;
+        }
+    }
+    footer {
+        padding-bottom: 50px;
+        @media(max-width:767px) {
+            padding-bottom: 10px;
+        }
+        .row {
+            margin-top: 40px;
+            @include flex(space-between, flex-start, row);
+            form {
+                flex: 0 0 68%;
+                @include flex(space-between, center, row);
+                @media(max-width:767px) {
+                    flex: 0 0 100%;
+                }
+                input {
+                    flex: 0 0 48%;
+                    padding: 10px;
+                    margin-bottom: 30px;
+                    border: none;
+                    background: $lightGray;
+                    @media(max-width:767px) {
+                        flex: 0 0 100%;
+                    }
+                }
+                textarea {
+                    flex: 0 0 100%;
+                    padding: 10px;
+                    border: none;
+                    background: $lightGray;
+                    margin-bottom: 15px;
+                }
+                button {
+                    @include btn($white, $pink, none);
+                    &:hover {
+                        color: white;
+                        border: none;
+                        background: $green;
+                    }
+                }
+            }
+            .info {
+                flex: 0 0 28%;
+                @media(max-width:767px) {
+                    flex: 0 0 100%;
+                }
+                p {
+                    line-height: 2.5;
+                    font-size: 1.2rem;
+                    i {
+                        color: $pink;
+                    }
+                }
+            }
+        }
+    }
+}
